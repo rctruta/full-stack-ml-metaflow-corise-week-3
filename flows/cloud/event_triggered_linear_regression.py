@@ -10,7 +10,7 @@ DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
     libraries={
         "pandas": "1.4.2",
         "pyarrow": "11.0.0",
-        "numpy": "1.21.2",
+        "numpy": "1.22",
         "scikit-learn": "1.1.2",
     }
 )
@@ -22,7 +22,17 @@ class TaxiFarePrediction(FlowSpec):
         # Try to complete tasks 2 and 3 with this function doing nothing like it currently is.
         # Understand what is happening.
         # Revisit task 1 and think about what might go in this function.
+        obviously_bad_data_filters = [
+            df.fare_amount > 0,  # fare_amount in US Dollars
+            df.trip_distance <= 100,  # trip_distance in miles
+            df.trip_distance > 0,
+            df.passenger_count > 0
+            # TODO: add some logic to filter out what you decide is bad data!
+            # TIP: Don't spend too much time on this step for this project though, in practice is a never-ending process.
+        ]
 
+        for f in obviously_bad_data_filters:
+            df = df[f]
         return df
 
     @step
