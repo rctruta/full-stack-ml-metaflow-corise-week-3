@@ -26,7 +26,9 @@ class TaxiFarePrediction(FlowSpec):
             df.fare_amount > 0,  # fare_amount in US Dollars
             df.trip_distance <= 100,  # trip_distance in miles
             df.trip_distance > 0,
-            df.passenger_count > 0
+            df.passenger_count > 0,
+            df.tip_amount >= 0,
+            df.total_amount > 0
             # TODO: add some logic to filter out what you decide is bad data!
             # TIP: Don't spend too much time on this step for this project though, in practice is a never-ending process.
         ]
